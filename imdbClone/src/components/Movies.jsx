@@ -11,7 +11,10 @@ function Movies() {
     if(pageNo==1){
       setpageNo(1)
     }
-    setpageNo(pageNo-1)
+    else{
+      setpageNo(pageNo-1)
+    }
+    
   }
   const handleNext=()=>{
     setpageNo(pageNo+1)
