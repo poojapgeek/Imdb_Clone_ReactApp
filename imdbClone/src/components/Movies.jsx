@@ -4,12 +4,12 @@ import {useEffect} from 'react'
 import axios from 'axios'
 import {useState} from 'react'
 import Pagination from './Pagination'
-function Movies() {
+function Movies({handleAddtoWatchlist,handleRemoveFromWatchList,watchList}) {
   const [movies,setMovies]=useState([])
   const [pageNo,setpageNo]=useState(1)
   const handlePrev=()=>{
     if(pageNo==1){
-      setpageNo(1)
+      setpageNo(pageNo)
     }
     else{
       setpageNo(pageNo-1)
@@ -28,7 +28,7 @@ function Movies() {
     <div className='p-5'><div className='text-2xl m-5 font-bold text-center'>Trending Movies</div>    
     <div className='flex flex-row flex-wrap justify-around gap-8'>
       {movies.map((movieObj)=>{
-        return <MovieCard name={movieObj.original_title}  poster_path={movieObj.poster_path}/>
+    return <MovieCard key={movieObj.id} movieObj={movieObj} name={movieObj.original_title}  poster_path={movieObj.poster_path} handleAddtoWatchlist={handleAddtoWatchlist} handleRemoveFromWatchList={handleRemoveFromWatchList} watchList={watchList}/>
       })}
       
       
