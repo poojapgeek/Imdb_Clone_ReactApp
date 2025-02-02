@@ -1,7 +1,12 @@
-import React from 'react'
+import React,{useState} from 'react'
 
 function watchList({watchList}) {
+  const [search,setSearch]=useState('')
+  let handleSearch =(e)=>{
+    setSearch(e.target.value)
+  }
   return (
+   
     <>
     <div className='flex justify-center flex-wrap m-4'>
       <div className='flex justify-center items-center h-[3rem] w-[9rem] bg-blue-400 rounded-xl text-white font-bold mx-4'>Action</div>
@@ -10,7 +15,7 @@ function watchList({watchList}) {
       
 
     </div>
-    <div className='flex justify-center my-4'> <input type='text' placeholder='Search for movies'className='h-[3rem] w-[18rem] border border-gray-10px bg-gray-200'/></div>
+    <div className='flex justify-center my-4'> <input onChange={handleSearch} value={search} type='text' placeholder='Search for movies'className='h-[3rem] w-[18rem] border border-gray-10px bg-gray-200'/></div>
     <div className='overflow-hidden rounded-lg border border-gray-200 m-4'>
       <table className='w-full text-gray-500'>
         <thead className='border-b-2'>
@@ -22,7 +27,9 @@ function watchList({watchList}) {
           </tr>
         </thead>
         <tbody>
-{watchList.map((movieObj)=>{
+{watchList.filter((movieObj)=>{
+  return movieObj.title.toLowerCase().includes(search.toLocaleLowerCase())
+}).map((movieObj)=>{
   return <tr className='border-b-2 text-center'>
   <td className='flex items-center py-4 px-6'>
     <img className='h-[9rem] w-[10rem]' src={`https://image.tmdb.org/t/p/original/${movieObj.poster_path}`}/>
