@@ -2,7 +2,7 @@ import './App.css'
 import Banner from './components/Banner';
 import Navbar from "./components/Navbar";
 import Movies from "./components/Movies";
-import WatchList from './components/WatchList';
+import WatchList from './components/watchList';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
@@ -34,7 +34,7 @@ function App() {
       <Navbar/>
       <Routes>
     <Route path='/' element={<><Banner/><Movies watchList={watchList} handleAddtoWatchlist={handleAddtoWatchlist} handleRemoveFromWatchList={handleRemoveFromWatchList}/></>} />
-     <Route path='/WatchList' element={<WatchList watchList={watchList}/>} />
+     <Route path='/watchList' element={<WatchList watchList={watchList} setwatchList={setwatchList}/>} />
       </Routes>
       </BrowserRouter>
     </>

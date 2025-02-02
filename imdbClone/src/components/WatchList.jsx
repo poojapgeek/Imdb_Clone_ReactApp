@@ -1,9 +1,22 @@
 import React,{useState} from 'react'
+import genreids from '../Utility/genre'
 
-function watchList({watchList}) {
+function watchList({watchList,setwatchList}) {
   const [search,setSearch]=useState('')
   let handleSearch =(e)=>{
     setSearch(e.target.value)
+  }
+  let sortIncreasing=()=>{
+   let sortedIncreasing= watchList.sort((movieA,movieB)=>{
+      return  movieA.vote_average - movieB.vote_average
+    })
+    setwatchList([...sortedIncreasing])
+  }
+  let sortDecreasing=()=>{
+   let sortedDecreasing= watchList.sort((movieA,movieB)=>{
+      return  movieB.vote_average - movieA.vote_average
+    })
+    setwatchList([...sortedDecreasing])
   }
   return (
    
@@ -21,7 +34,8 @@ function watchList({watchList}) {
         <thead className='border-b-2'>
           <tr>
             <th>Movie</th>
-            <th>Ratings</th>
+            <th className='flex gap-3 justify-center'><div onClick={sortIncreasing}><i class="fa-solid fa-arrow-up"></i></div><div>Ratings</div><div  onClick={sortDecreasing}><i class="fa-solid fa-arrow-down"></i></div></th>
+             
             <th>Popularity</th>
             <th>Genre</th>
           </tr>
@@ -36,7 +50,7 @@ function watchList({watchList}) {
     <div className='mx-10'>{movieObj.title}</div></td>
     <td>{movieObj.vote_average}</td>
     <td>{movieObj.popularity}</td>
-    <td>Action</td>
+    <td>{genreids[movieObj.genre_ids[0]]}</td>
     <td className='text-red-400'>Delete</td>
     </tr>
 })}
