@@ -18,7 +18,7 @@ function App() {
   let handleRemoveFromWatchList=(movieObj)=>{
     let filteredWatchList=watchList.filter((movie)=>{ return movie.id!==movieObj.id})
     setwatchList(filteredWatchList)
-    localStorage.setItem("moviesApp", JSON.stringify(filteredWatchlist));
+    localStorage.setItem("moviesApp", JSON.stringify(filteredWatchList));
     console.log(filteredWatchList)
   }
   useEffect(()=>{
@@ -34,7 +34,7 @@ function App() {
       <Navbar/>
       <Routes>
     <Route path='/' element={<><Banner/><Movies watchList={watchList} handleAddtoWatchlist={handleAddtoWatchlist} handleRemoveFromWatchList={handleRemoveFromWatchList}/></>} />
-     <Route path='/watchList' element={<WatchList watchList={watchList} setwatchList={setwatchList}/>} />
+     <Route path='/watchList' element={<WatchList watchList={watchList} setwatchList={setwatchList}  handleRemoveFromWatchList={handleRemoveFromWatchList}/>}/>
       </Routes>
       </BrowserRouter>
     </>
